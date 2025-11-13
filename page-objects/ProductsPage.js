@@ -6,5 +6,33 @@ export class ProductsPage {
         this.cartIcon = page.getByTestId('shopping-cart-link')
         this.menuButton = page.getByTestId('open-menu')
         this.productItems = page.getByTestId('inventory-item-description')
+        this.productNames = page.getByTestId('inventory-item-name')
+        this.productPrices = page.getByTestId('inventory-item-price')
+        this.sortDropdownMenu = page.getByTestId('product-sort-container')
+    }
+
+    productName(index) {
+        return this.productItems.nth(index).getByTestId('inventory-item-name')
+    }
+
+    productPrice(index) {
+        return this.productItems.nth(index).getByTestId('inventory-item-price')
+    }
+
+    productAddToCartButton(index) {
+        return this.productItems.nth(index).getByRole('button', {name: 'Add to cart'})
+    }
+
+    productDescription(index) {
+        return this.productItems.nth(index).getByTestId('inventory-item-desc')
+    }
+
+    async getProductNames() {
+        return await this.productNames.allTextContents()
+    }
+
+    async getProductPrices() {
+        const productPricesText = await this.productPrices.allTextContents()
+        return productPricesText.map(testPrice => Number(testPrice.replace('$', '').trim()))
     }
 }

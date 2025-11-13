@@ -19,7 +19,7 @@ test.describe('Login tests - possitive scenarios', () => {
         })
 
         await test.step('Enter valid username and valid password, click Login button', async () => {
-            await loginPage.login()
+            await loginPage.login(users.standardUser.username, users.standardUser.password)
         })
 
         await test.step('Verify user landed on the Products page', async () => {
