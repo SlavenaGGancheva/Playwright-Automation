@@ -4,6 +4,7 @@ export class ProductsPage {
         this.pageTitle = page.getByText('Swag Labs')
         this.pageHeader = page.getByText('Products')
         this.cartIcon = page.getByTestId('shopping-cart-link')
+        this.cartIconBadge = page.getByTestId('shopping-cart-badge')
         this.menuButton = page.getByTestId('open-menu')
         this.productItems = page.getByTestId('inventory-item-description')
         this.productNames = page.getByTestId('inventory-item-name')
@@ -23,6 +24,10 @@ export class ProductsPage {
         return this.productItems.nth(index).getByRole('button', {name: 'Add to cart'})
     }
 
+    productRemoveFromCartButton(index) {
+        return this.productItems.nth(index).getByRole('button', {name: 'Remove'})
+    }
+
     productDescription(index) {
         return this.productItems.nth(index).getByTestId('inventory-item-desc')
     }
@@ -34,5 +39,10 @@ export class ProductsPage {
     async getProductPrices() {
         const productPricesText = await this.productPrices.allTextContents()
         return productPricesText.map(testPrice => Number(testPrice.replace('$', '').trim()))
+    }
+
+    async getCartIconBadgeCount() {
+        const cartIconBadgeCountText = await this.cartIconBadge.textContent()
+        return Number(cartIconBadgeCountText)
     }
 }

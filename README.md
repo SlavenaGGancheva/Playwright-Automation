@@ -1,1 +1,2 @@
-# Playwright-Automation
+# 🎭 Playwright Test Automation Framework
+
