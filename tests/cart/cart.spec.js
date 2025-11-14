@@ -3,16 +3,16 @@ import { LoginPage } from '../../page-objects/LoginPage';
 import { ProductsPage } from '../../page-objects/ProductsPage';
 import { CartPage } from '../../page-objects/CartPage';
 import users from '../../testData/users.json';
-import { CheckoutPage } from '../../page-objects/CheckoutPage';
+import { CheckoutInformationPage } from '../../page-objects/CheckoutInformationPage';
 
 test.describe('Cart Tests', () => {
-    let loginPage, productsPage, cartPage, checkoutPage;
+    let loginPage, productsPage, cartPage, checkoutInformationPage;
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         productsPage = new ProductsPage(page);
         cartPage = new CartPage(page);
-        checkoutPage = new CheckoutPage(page)
+        checkoutInformationPage = new CheckoutInformationPage(page)
 
         await page.goto('/');
         await loginPage.login(
@@ -119,7 +119,7 @@ test.describe('Cart Tests', () => {
             await productsPage.cartIcon.click()
             await cartPage.checkoutButton.click()
             await expect(page).toHaveURL('/checkout-step-one.html')
-            await expect(checkoutPage.pageHeader).toHaveText('Checkout: Your Information')
+            await expect(checkoutInformationPage.pageHeader).toHaveText('Checkout: Your Information')
         })
     })
 
@@ -201,7 +201,7 @@ test.describe('Cart Tests', () => {
             // Go back to Checkout page
             await cartPage.checkoutButton.click()
             // Go to Cart page
-            await checkoutPage.cancelButton.click()
+            await checkoutInformationPage.cancelButton.click()
             // Verify product is still in cart on Cart page
             await expect(cartPage.productItems).toHaveCount(1)
         })

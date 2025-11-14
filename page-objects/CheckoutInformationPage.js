@@ -1,4 +1,4 @@
-export class CheckoutPage {
+export class CheckoutInformationPage {
     constructor(page) {
         this.page = page
         this.pageHeader = page.getByText('Checkout: Your Information')
