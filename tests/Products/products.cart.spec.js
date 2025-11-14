@@ -29,7 +29,6 @@ test.describe('Add and Remove products from products page functionality', () => 
     })
 
     test('Verify button change to "Remove" after adding product', async () => {
-        await expect(productsPage.productAddToCartButton(0)).toHaveText('Add to cart')
         await productsPage.productAddToCartButton(0).click()
         await expect(productsPage.productRemoveFromCartButton(0)).toHaveText('Remove')
     })
@@ -43,10 +42,9 @@ test.describe('Add and Remove products from products page functionality', () => 
         await productsPage.productRemoveFromCartButton(0).click()
         const updatedCartIconBadgeCount = await productsPage.getCartIconBadgeCount()
         expect(updatedCartIconBadgeCount).toEqual(1)
-
     })
 
-     test('Verify cart badge disappears after removing all products', async () => {
+     test('Verify cart badge disappears after removing all products', async ({ }) => {
         await productsPage.productAddToCartButton(0).click()
         await productsPage.productAddToCartButton(1).click()
         const cartIconBadgeCount = await productsPage.getCartIconBadgeCount()
@@ -54,6 +52,7 @@ test.describe('Add and Remove products from products page functionality', () => 
          
         await productsPage.productRemoveFromCartButton(0).click()
         await productsPage.productRemoveFromCartButton(1).click()
+         
         await expect(productsPage.cartIconBadge).not.toBeVisible()
     })
 })

@@ -2,8 +2,9 @@ import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { ProductsPage } from '../../page-objects/ProductsPage'
 import { CartPage } from '../../page-objects/CartPage'
-import users from '../../testData/users.json'
 import { CheckoutPage } from '../../page-objects/CheckoutPage'
+import users from '../../testData/users.json'
+
 
 test.describe('Checkout Tets', () => {
 
@@ -16,7 +17,6 @@ test.describe('Checkout Tets', () => {
         checkoutPage = new CheckoutPage(page)
 
         await page.goto('/')
-        await loginPage.login()
         await loginPage.login(users.standardUser.username, users.standardUser.password)
     })
 

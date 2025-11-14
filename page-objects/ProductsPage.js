@@ -38,7 +38,7 @@ export class ProductsPage {
 
     async getProductPrices() {
         const productPricesText = await this.productPrices.allTextContents()
-        return productPricesText.map(testPrice => Number(testPrice.replace('$', '').trim()))
+        return productPricesText.map(textPrice => Number(textPrice.replace('$', '').trim()))
     }
 
     async getCartIconBadgeCount() {
