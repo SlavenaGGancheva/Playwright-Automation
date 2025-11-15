@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import users from '../../testData/users.json'
 import errorMessages from '../../testData/loginErrorMessages.json'
@@ -36,24 +36,19 @@ const invalidLoginScenarios = [
     }
 ]
 
-test.describe('Login tests - negative scenarios', () => {
+test.describe('Login - negative scenarios', () => {
     
     let loginPage
 
     test.beforeEach(async ({ page }) => {
-        await page.goto('/')
         loginPage = new LoginPage(page)
+        await loginPage.open()
     })
 
     invalidLoginScenarios.forEach(scenario => {
-        test(scenario.name, async () => {
-            await test.step('Attempt to login', async () => {
-                await loginPage.login(scenario.username, scenario.password)
-            })
-
-            await test.step('Verify respective error message appears', async () => {
-                await loginPage.assertErrorMessage(scenario.errorMessage)
-            })
+        test(`Verify error apperars for ${scenario.name}`, async () => {
+            await loginPage.login(scenario.username, scenario.password)
+            await loginPage.assertErrorMessage(scenario.errorMessage)
         })
     })
 })

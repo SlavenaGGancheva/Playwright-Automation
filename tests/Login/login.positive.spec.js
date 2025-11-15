@@ -1,40 +1,41 @@
-import { test, expect } from '@playwright/test'
-import { LoginPage } from '../../page-objects/LoginPage'
-import { ProductsPage } from '../../page-objects/ProductsPage'
-import users from '../../testData/users.json'
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../../page-objects/LoginPage';
+import { ProductsPage } from '../../page-objects/ProductsPage';
+import users from '../../testData/users.json';
 
-test.describe('Login tests - possitive scenarios', () => {
+test.describe('Login - positive scenarios', () => {
+    let loginPage;
+    let productsPage;
 
-    test('Login with valid credentials', async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
+        loginPage = new LoginPage(page);
+        productsPage = new ProductsPage(page);
+        await loginPage.open();
+    });
 
-        const loginPage = new LoginPage(page)
-        const productsPage = new ProductsPage(page)
+    test('Verify login successfully with valid credentials and land on Products page', async ({page}) => {
+        await loginPage.assertOnLoginPage()
 
-        await test.step('Navigate to Saucedemo login page', async () => {
-            await page.goto('/')
+        await loginPage.login(
+            users.standardUser.username,
+            users.standardUser.password
+        );
 
-            await expect(loginPage.pageTitle).toBeVisible()
-            await expect(loginPage.usernameField).toBeVisible()
-            await expect(loginPage.passwordField).toBeVisible()
-        })
+        await expect(page).toHaveURL('/inventory.html');
+        await expect(productsPage.pageTitle).toHaveText('Swag Labs');
+        await expect(productsPage.pageHeader).toBeVisible();
+        await expect(productsPage.pageHeader).toHaveText('Products');
+        await expect(productsPage.productItems).toHaveCount(6);
+        await expect(productsPage.cartIcon).toBeVisible();
+        await expect(productsPage.menuButton).toBeVisible();
+    });
 
-        await test.step('Enter valid username and valid password, click Login button', async () => {
-            await loginPage.login(users.standardUser.username, users.standardUser.password)
-        })
-
-        await test.step('Verify user landed on the Products page', async () => {
-            // Verify redirect to inventory page
-            await expect(page).toHaveURL('/inventory.html')
-            // Verify page title
-            await expect(productsPage.pageTitle).toHaveText('Swag Labs')
-            // Verify products catalog is displayed with 6 products
-            await expect(productsPage.pageHeader).toBeVisible()
-            await expect(productsPage.pageHeader).toHaveText('Products')
-            await expect(productsPage.productItems).toHaveCount(6)
-            // Verify cart icon is visible
-            await expect(productsPage.cartIcon).toBeVisible()
-            // Verify hamburger manu is visible
-            await expect(productsPage.menuButton).toBeVisible()
-        })
+    test('Verify logout after successful login', async ({page}) => {
+        await loginPage.login(
+            users.standardUser.username,
+            users.standardUser.password
+        );
+        await productsPage.logout();
+        await loginPage.assertOnLoginPage();
     })
-})
+});
