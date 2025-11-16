@@ -8,7 +8,7 @@ import users from '../../testData/users.json';
 import errorMessages from '../../testData/checkoutValidationMessages.json';
 import { faker } from '@faker-js/faker';
 
-test.describe('Checkout Information page Tests', () => {
+test.describe('Checkout - Information page', () => {
     let loginPage,
         productsPage,
         cartPage,
@@ -22,7 +22,7 @@ test.describe('Checkout Information page Tests', () => {
         checkoutInformationPage = new CheckoutInformationPage(page);
         checkoutOverviewPage = new CheckoutOverviewPage(page);
 
-        await page.goto('/');
+        await loginPage.open();
         await loginPage.login(
             users.standardUser.username,
             users.standardUser.password
@@ -35,7 +35,7 @@ test.describe('Checkout Information page Tests', () => {
         await expect(checkoutInformationPage.pageHeader).toBeVisible();
     });
 
-    test('Valid information moves user to Checkout Overview page', async ({ page }) => {
+    test('Verify entering valid information moves user to Checkout Overview page', async ({ page }) => {
         await checkoutInformationPage.completeInformationForm(
             faker.person.firstName(),
             faker.person.lastName(),
@@ -49,7 +49,7 @@ test.describe('Checkout Information page Tests', () => {
         await expect(page).toHaveURL('/checkout-step-two.html')
     })
 
-    test('Cancel button returns user to Cart page and product persists in cart', async () => {
+    test('Verify Cancel returns user to Cart page and product persists in cart', async () => {
         await checkoutInformationPage.cancelButton.click()
 
         await expect(cartPage.pageHeader).toBeVisible()
@@ -57,8 +57,7 @@ test.describe('Checkout Information page Tests', () => {
         await expect(cartPage.productItems).toHaveCount(1)
     })
 
-    test('Error disappears after filling missing field and resubmitting', async () => {
-        // Trigger an error
+    test('Verify error disappears after filling missing field and resubmitting', async () => {
         await checkoutInformationPage.completeInformationForm(
             '',
             faker.person.lastName(),
@@ -66,10 +65,10 @@ test.describe('Checkout Information page Tests', () => {
         )
         await checkoutInformationPage.continueButton.click()
         await checkoutInformationPage.assertErrorMessage(errorMessages.missingFirstNameError)
-        // Enter missing information (First name)
+    
         await checkoutInformationPage.firstNameField.fill(faker.person.firstName())
         await checkoutInformationPage.continueButton.click()
-        // Assert on Checkout Overview page
+
         await expect(checkoutOverviewPage.pageHeader).toBeVisible()
     })
 
@@ -105,7 +104,7 @@ test.describe('Checkout Information page Tests', () => {
         ];
 
         requiredFieldScenarios.forEach((scenario) => {
-            test(scenario.name, async () => {
+            test(`Verify error message is dispalyed when ${scenario.name}`, async () => {
                 await checkoutInformationPage.completeInformationForm(
                     scenario.formData.firstName,
                     scenario.formData.lastName,

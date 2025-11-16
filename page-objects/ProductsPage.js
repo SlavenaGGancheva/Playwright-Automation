@@ -43,6 +43,10 @@ export class ProductsPage {
     }
 
     async getCartIconBadgeCount() {
+        const badgeCount = await this.cartIconBadge.count()
+        if (badgeCount === 0) {
+            return 0
+        }
         const cartIconBadgeCountText = await this.cartIconBadge.textContent()
         return Number(cartIconBadgeCountText)
     }
