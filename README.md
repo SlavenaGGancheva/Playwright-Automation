@@ -1,52 +1,77 @@
 # 🎭 Playwright Test Automation Framework
 
-This project is a UI automation framework built with [Playwright](https://playwright.dev/) and JavaScript
-to test the e-commerce demo site https://www.saucedemo.com.
 
-It is designed to simulate a real-world QA Automation Engineer workflow:
-- Page Object Model
-- Data-driven tests
-- Positive & negative scenarios
-- CI pipeline (GitHub Actions)
-- HTML reports & screenshots on failure
+[![GitHub followers](https://img.shields.io/github/followers/SlavenaGGancheva?style=social)](https://github.com/SlavenaGGancheva)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Slavena%20Gancheva-blue?logo=linkedin)](https://www.linkedin.com/in/slavena-gancheva-5484b02a2)
 
-## Tech Stack
+End-to-end UI test automation framework for [saucedemo.com](https://www.saucedemo.com/) built with **Playwright** and **JavaScript**, following the **Page Object Model** and organized into clear, business-oriented test suites (Login, Products, Cart, Checkout).
 
-- Playwright Test (JavaScript)
-- Node.js
-- GitHub Actions (CI)
-- Allure Report / Playwright HTML report
-- Faker.js for test data
+This project is part of my QA Automation portfolio and showcases how I design, structure, and implement automated tests for a modern web application.
 
-## Test Coverage
+---
 
-**Login**
-- Valid login for standard user
-- Negative scenarios:
-  - Locked-out user
-  - Invalid username/password
-  - Empty username/password
-- Error message validation
+## 🔍 Highlights
 
-**Products Page**
-- Products are displayed with name, price, and image
-- Sorting: A→Z, Z→A, Price low→high, high→low
-- Add/remove products from cart
-- Cart icon badge count
+- ✅ **Real website**: `https://www.saucedemo.com/`
+- ✅ **Playwright Test + JavaScript (ESM)**
+- ✅ **Page Object Model (POM)** for maintainability
+- ✅ **Cross-browser** execution (Chromium, Firefox, WebKit)
+- ✅ **Data-driven tests** (login & form validation scenarios)
+- ✅ **End-to-end checkout flows** (single & multiple products)
+- ✅ **UI & functional coverage** for login, products, cart, checkout
+- ✅ **HTML test report**, traces on retry, screenshots on failure
 
-**Cart**
-- Empty cart behavior
-- Remove items from cart
-- Cart summary validation
+---
 
-**Checkout**
-- All fields required on information page (first name, last name, ZIP)
-- Error messages for missing fields
-- Successful checkout flow:
-  - Add item → Cart → Checkout → Overview → Finish
-  - Verify item details, subtotal, tax, total
-  - Order confirmation page
-  - “Back Home” returns to Products and clears cart
+## 🧰 Tech Stack
 
+- **Language:** JavaScript (ESM)
+- **Test Runner:** Playwright Test
+- **Design Pattern:** Page Object Model (POM)
+- **Libraries & Tools:**
+  - `@playwright/test`
+  - `@faker-js/faker` for realistic test data
+- **Browsers:** Chromium, Firefox, WebKit
+- **Reporting & Debugging:** HTML reporter, Playwright Trace Viewer, screenshots on failure
 
-## Project Structure
+---
+
+## 🧱 Project Structure
+
+```text
+playwright-automation/
+  ├─ page-objects/
+  │   ├─ CartPage.js
+  │   ├─ CheckoutCompletePage.js
+  │   ├─ CheckoutInformationPage.js
+  │   ├─ CheckoutOverviewPage.js
+  │   ├─ LoginPage.js
+  │   └─ ProductsPage.js
+  │
+  ├─ tests/
+  │   ├─ login/
+  │   │   ├─ login.positive.spec.js
+  │   │   └─ login.negative.spec.js
+  │   │
+  │   ├─ products/
+  │   │   ├─ products.ui.spec.js
+  │   │   ├─ products.add-remove.spec.js
+  │   │   └─ products.sorting.spec.js
+  │   │
+  │   ├─ cart/
+  │   │   ├─ cart.empty.spec.js
+  │   │   ├─ cart.items.spec.js
+  │   │   └─ cart.navigation-persistence.spec.js
+  │   │
+  │   └─ checkout/
+  │       ├─ checkout.information.spec.js
+  │       ├─ checkout.overview.spec.js
+  │       └─ checkout.flow.spec.js
+  │
+  ├─ testData/
+  │   ├─ users.json
+  │   ├─ loginErrorMessages.json
+  │   └─ checkoutValidationMessages.json
+  │
+  ├─ playwright.config.js
+  └─ package.json

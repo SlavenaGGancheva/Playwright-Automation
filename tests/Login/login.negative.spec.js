@@ -46,7 +46,7 @@ test.describe('Login - negative scenarios', () => {
     })
 
     invalidLoginScenarios.forEach(scenario => {
-        test(`Verify error apperars for ${scenario.name}`, async () => {
+        test(`Verify error appears for ${scenario.name}`, async () => {
             await loginPage.login(scenario.username, scenario.password)
             await loginPage.assertErrorMessage(scenario.errorMessage)
         })
