@@ -78,6 +78,8 @@ playwright-automation/
   ├─ playwright.config.js
   └─ package.json
 
+---
+
 ## 🧪 Test Coverage
 
 ### 🔐 Login
