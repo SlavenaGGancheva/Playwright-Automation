@@ -12,7 +12,7 @@ This project demonstrates how I design, build, and organize UI automation for a 
 
 ## 🔍 Highlights
 
-- 🚀 **Real web app** under test: `https://www.saucedemo.com/`
+- 🚀 **Web app** under test: `https://www.saucedemo.com/`
 - 🧪 **Playwright Test** with JavaScript (ESM)
 - 🧱 **Page Object Model (POM)** for reusable clean architecture
 - 🌐 **Cross-browser** testing (Chromium, Firefox, WebKit)
@@ -20,7 +20,7 @@ This project demonstrates how I design, build, and organize UI automation for a 
 - ✔️ **End-to-end checkout journey** (single + multiple items)
 - 📊 **HTML report**, traces on retry, screenshots on failure
 - 🧩 **Robust locator strategy** using roles + test IDs
-- 🗂️ Clear folder/test suite organization
+- 🗂️ **Clear folder/test suite organization**
 
 ---
 
@@ -30,7 +30,7 @@ This project demonstrates how I design, build, and organize UI automation for a 
 |---------|-------|
 | **Language** | JavaScript (ESM) |
 | **Automation Framework** | Playwright Test |
-| **Pattern** | Page Object Model |
+| **Design Pattern** | Page Object Model |
 | **Data Generation** | @faker-js/faker |
 | **Browsers** | Chromium, Firefox, WebKit |
 | **Reporting** | Built-in HTML Reporter, Trace Viewer |
