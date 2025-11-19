@@ -97,120 +97,86 @@ playwright-automation/
 
 ```
 ---
+## 🧠 Test Architecture
 
-## 🧪 Test Coverage
+The test suite is organized using a **feature-based structure**, ensuring clarity, scalability, and ease of maintenance.  
+Each folder represents a functional area of the application, and each test file focuses on a specific behavior or user flow within that area.
 
-### 🔐 Login
+### 📁 How the Tests Are Organized
 
-**Files:**  
-`tests/login/login.positive.spec.js`  
-`tests/login/login.negative.spec.js`
+#### **1. `login/`**
+Handles everything related to authentication.
 
-- Successful login with valid standard user.
-- Logout flow returns user to Login page.
-- Data-driven negative scenarios:
-  - Valid username + invalid password
-  - Invalid username + valid password
-  - Locked out user
-  - Empty username
-  - Empty password  
-- Centralized error message assertions in `LoginPage` page object.
+- Positive login scenarios  
+- Negative login scenarios (data-driven)  
+- Error message validation  
+- Locked-out user behavior  
+- Logout flow  
 
----
+**Focus:** credential validation, error handling, access control.
 
-### 🛍️ Products Page
+#### **2. `products/`**
+Covers the product listing, UI behavior, and interactions.
 
-**Files:**  
-`tests/products/products.display.spec.js`  
-`tests/products/products.add-remove.spec.js`  
-`tests/products/products.sorting.spec.js`
+- Display/UI validation  
+- Add/remove buttons  
+- Cart badge logic  
+- Sorting (A–Z, Z–A, price low → high, price high → low)  
+- Product metadata checks (name, price, description)
 
-**UI checks:**
+**Focus:** UX consistency, catalog functionality, sorting accuracy.
 
-- Exactly 6 products are displayed.
-- Each product shows:
-  - Name (non-empty)
-  - Price (contains `$`)
-  - Description (non-empty)
-  - “Add to cart” button visible
+#### **3. `cart/`**
+Validates the shopping cart functionality and persistence.
 
-**Add / Remove / Badge logic:**
+- Empty state UI  
+- Adding/removing multiple products  
+- Quantity and description labels  
+- Product details consistency  
+- Cart persistence across pages and refreshes  
 
-- Add single product → badge count = 1  
-- Add multiple products → badge count updates correctly  
-- “Add to cart” button changes to **“Remove”** after adding  
-- Removing products updates badge and hides it when cart becomes empty  
+**Focus:** cart accuracy, state management, and consistency across navigation.
 
-**Sorting:**
+#### **4. `checkout/`**
+Manages multi-step checkout verification and data validation.
 
-- A → Z (name ascending)  
-- Z → A (name descending)  
-- Price low → high  
-- Price high → low  
+- Form validation (first name, last name, postal code)  
+- Transition to overview page  
+- Overview calculations (tax, item total, final total)  
+- Completing the purchase  
+- Final confirmation page  
+- Back Home flow  
+- End-to-end purchase journey (single + multiple products)
 
-Sorting assertions compare UI values with a locally sorted copy of the same data.
+**Focus:** multi-step flows, validation accuracy, and final order completion.
 
----
+### 🧩 Page Object Model Integration
 
-### 🛒 Cart
+Each test suite interacts with a dedicated page object:
 
-**Files:**  
-`tests/cart/cart.empty.spec.js`  
-`tests/cart/cart.items.spec.js`  
-`tests/cart/cart.navigation-persistence.spec.js`
+| Test Suite | Page Objects Used |
+|------------|-------------------|
+| **login/** | `LoginPage` |
+| **products/** | `ProductsPage` |
+| **cart/** | `ProductsPage`, `CartPage` |
+| **checkout/** | `CheckoutInformationPage`, `CheckoutOverviewPage`, `CheckoutCompletePage` |
 
-**Empty state:**
+This design ensures:
 
-- “Your Cart” header visible  
-- Quantity and description labels displayed  
-- No items rendered  
-- No cart badge  
-- “Continue Shopping” enabled  
+- Minimal code duplication  
+- Cleaner test files  
+- Reusable, maintainable selectors  
+- Business-focused actions and reusable UI behavior  
 
-**Items & details:**
+### 🎯 Guiding Principles
 
-- Adding 1 / multiple products shows correct items  
-- Removing from Products or Cart page updates cart items  
-- Product **name**, **price**, and **description** match between pages  
+This automation framework follows strong engineering principles:
 
-**Persistence:**
-
-- Cart retains items after:
-  - Refresh  
-  - Navigation Products ↔ Cart  
-  - Navigation Cart ↔ Checkout (cancel)
-
----
-
-### 🧾 Checkout
-
-#### 1) Checkout Information Page
-
-- Valid information moves user to Checkout Overview  
-- Cancel returns user to Cart, keeping products  
-- Missing field validation (data-driven):
-  - Missing first name  
-  - Missing last name  
-  - Missing zip/postal code  
-- Error disappears after fixing field and resubmitting  
-
-#### 2) Checkout Overview Page
-
-- Payment Information, Shipping, Total sections visible  
-- `item total + tax = total`  
-- Cancel returns to Products and preserves cart  
-- Finish:
-  - Confirms order  
-  - Displays thank-you message  
-  - Clears cart after navigating home  
-
-#### 3) End-to-End Checkout Flow
-
-- Add single or multiple products  
-- Products → Cart → Checkout Info → Overview → Complete  
-- Faker-generated user data  
-- Price sanity checks  
-- Order completion and cart reset  
+- **Single Responsibility Principle:** each test file covers one behavior  
+- **Clear naming conventions:** easy to navigate and understand  
+- **Deterministic assertions:** avoids flaky behavior  
+- **Low coupling, high cohesion:** page objects stay focused and clean  
+- **Scalable architecture:** easy to add new features, tests, or utilities  
 
 ---
 
