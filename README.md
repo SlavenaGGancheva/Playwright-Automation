@@ -3,6 +3,9 @@
 
 [![GitHub followers](https://img.shields.io/github/followers/SlavenaGGancheva?style=social)](https://github.com/SlavenaGGancheva)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Slavena%20Gancheva-blue?logo=linkedin)](https://www.linkedin.com/in/slavena-gancheva-5484b02a2)
+![CI](https://img.shields.io/github/actions/workflow/status/SlavenaGGancheva/Playwright-Automation/playwright.yml?label=CI%20Build)
+![Node](https://img.shields.io/badge/node-18.x-green?logo=node.js)
+![Playwright](https://img.shields.io/badge/Playwright-latest-blue?logo=playwright)
 
 End-to-end UI test automation framework for [saucedemo.com](https://www.saucedemo.com/) built with **Playwright** and **JavaScript**, following the **Page Object Model (POM)** and structured into clean, feature-focused test suites.
 
