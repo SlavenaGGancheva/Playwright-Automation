@@ -34,7 +34,7 @@ export default defineConfig({
     video: {
         mode: 'on-first-retry',
         size: {width: 1920, height: 1080}
-  },
+    },
 
   /* Configure projects for major browsers */
   projects: [

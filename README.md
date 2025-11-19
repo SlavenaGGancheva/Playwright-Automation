@@ -211,6 +211,102 @@ Sorting assertions compare UI values with a locally sorted copy of the same data
 
 ---
 
+## 🚀 Quick Start / Installation
+
+Follow these steps to install, configure, and run the Playwright automation framework locally.
+
+---
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/SlavenaGGancheva/Playwright-Automation.git
+cd Playwright-Automation
+```
+
+---
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Install Playwright browsers
+
+```bash
+npx playwright install --with-deps
+```
+
+> Installs Chromium, Firefox, and WebKit along with required system dependencies.
+
+---
+
+### 4️⃣ Set up environment variables
+
+Create a `.env` file in the root directory:
+
+```bash
+touch .env
+```
+
+Add the following values:
+
+```env
+BASE_URL=https://www.saucedemo.com
+STANDARD_USER=standard_user
+STANDARD_PASSWORD=secret_password
+```
+
+> Your `.env` file is ignored by Git to protect credentials.
+
+---
+
+### 5️⃣ Run all tests
+
+```bash
+npx playwright test
+```
+
+---
+
+### 6️⃣ Run a specific test file
+
+```bash
+npx playwright test tests/login/login.positive.spec.js
+```
+
+---
+
+### 7️⃣ Run tests in headed mode (view browser UI)
+
+```bash
+npx playwright test --headed
+```
+
+---
+
+### 8️⃣ Show the HTML report
+
+```bash
+npx playwright show-report
+```
+
+This opens Playwright’s HTML test report with screenshots and traces.
+
+---
+
+### 9️⃣ Run tests in debug mode
+
+```bash
+npx playwright test --debug
+```
+
+This launches the Playwright Inspector—useful for debugging selectors and flows.
+
+
 ## 🧩 Page Object Model (POM)
 
 Each page is represented by a dedicated class in `page-objects/`.
