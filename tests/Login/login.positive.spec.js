@@ -16,9 +16,14 @@ test.describe('Login - positive scenarios', () => {
     test('Verify login successfully with valid credentials and land on Products page', async ({page}) => {
         await loginPage.assertOnLoginPage()
 
+        // await loginPage.login(
+        //     users.standardUser.username,
+        //     users.standardUser.password
+        // );
+
         await loginPage.login(
-            users.standardUser.username,
-            users.standardUser.password
+            process.env.USERNAME,
+            process.env.PASSWORD
         );
 
         await expect(page).toHaveURL('/inventory.html');
@@ -31,9 +36,14 @@ test.describe('Login - positive scenarios', () => {
     });
 
     test('Verify logout after successful login', async ({page}) => {
+        // await loginPage.login(
+        //     users.standardUser.username,
+        //     users.standardUser.password
+        // );
+
         await loginPage.login(
-            users.standardUser.username,
-            users.standardUser.password
+            process.env.USERNAME,
+            process.env.PASSWORD
         );
         await productsPage.logout();
         await loginPage.assertOnLoginPage();

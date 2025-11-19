@@ -103,7 +103,7 @@ playwright-automation/
 ### 🛍️ Products Page
 
 **Files:**  
-`tests/products/products.ui.spec.js`  
+`tests/products/products.display.spec.js`  
 `tests/products/products.add-remove.spec.js`  
 `tests/products/products.sorting.spec.js`
 
