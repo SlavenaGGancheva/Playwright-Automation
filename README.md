@@ -215,7 +215,6 @@ Sorting assertions compare UI values with a locally sorted copy of the same data
 
 Follow these steps to install, configure, and run the Playwright automation framework locally.
 
----
 
 ### 1️⃣ Clone the repository
 
@@ -224,7 +223,6 @@ git clone https://github.com/SlavenaGGancheva/Playwright-Automation.git
 cd Playwright-Automation
 ```
 
----
 
 ### 2️⃣ Install dependencies
 
@@ -232,7 +230,6 @@ cd Playwright-Automation
 npm install
 ```
 
----
 
 ### 3️⃣ Install Playwright browsers
 
@@ -242,7 +239,6 @@ npx playwright install --with-deps
 
 > Installs Chromium, Firefox, and WebKit along with required system dependencies.
 
----
 
 ### 4️⃣ Set up environment variables
 
@@ -262,7 +258,6 @@ STANDARD_PASSWORD=secret_password
 
 > Your `.env` file is ignored by Git to protect credentials.
 
----
 
 ### 5️⃣ Run all tests
 
@@ -270,7 +265,6 @@ STANDARD_PASSWORD=secret_password
 npx playwright test
 ```
 
----
 
 ### 6️⃣ Run a specific test file
 
@@ -278,7 +272,6 @@ npx playwright test
 npx playwright test tests/login/login.positive.spec.js
 ```
 
----
 
 ### 7️⃣ Run tests in headed mode (view browser UI)
 
@@ -286,7 +279,6 @@ npx playwright test tests/login/login.positive.spec.js
 npx playwright test --headed
 ```
 
----
 
 ### 8️⃣ Show the HTML report
 
@@ -296,7 +288,6 @@ npx playwright show-report
 
 This opens Playwright’s HTML test report with screenshots and traces.
 
----
 
 ### 9️⃣ Run tests in debug mode
 
