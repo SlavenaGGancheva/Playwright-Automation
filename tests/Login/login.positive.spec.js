@@ -25,8 +25,10 @@ test.describe('Login - positive scenarios', () => {
             process.env.USERNAME,
             process.env.PASSWORD
         );
-
+        
         await expect(page).toHaveURL('/inventory.html');
+        // await page.screenshot({path: 'screenshots/productsPage.png'})
+
         await expect(productsPage.pageTitle).toHaveText('Swag Labs');
         await expect(productsPage.pageHeader).toBeVisible();
         await expect(productsPage.pageHeader).toHaveText('Products');
